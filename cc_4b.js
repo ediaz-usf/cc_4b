@@ -1,3 +1,4 @@
+// Step 2
 let products = [
     {sku:'001', name:'apple', category:'fruit', price: 1, inventory: 10},
     {sku:'002', name:'banana', category:'fruit', price: 0.5, inventory: 50},
@@ -6,6 +7,7 @@ let products = [
     {sku:'005', name:'soap', category:'soap', price: 10, inventory: 30},
 ]
 
+//Step 3
 for (let product of products) {
 
     switch (product.category) {
@@ -30,26 +32,41 @@ for (let product of products) {
      console.log(`The promo price for ${product.name} is $${promoPrice}`);
 } 
 
-let customerType = ['regular', 'student', 'senior'];
+console.log('----------------------------------'); 
 
-for (let product of products) {
+// Step 4
+const customers = [
+    {id: 1, customerType: 'regular', couponCode: 'SAVE10', orderTotal: 100},
+    {id: 2, customerType: 'student', couponCode: 'FREESHIP', orderTotal: 50},
+    {id: 3, customerType: 'senior', couponCode: null, orderTotal: 75},
+    {id: 4, customerType: 'regular', couponCode: 'FREESHIP', orderTotal: 200},
+    {id: 5, customerType: 'student', couponCode: null, orderTotal: 30},
+]
 
-    if (customerType === 'student') {
-            couponCode = 0.05; // 5% discount
-    } else if (customerType === 'senior') {
-            couponCode =  0.07;   // 7% discount
+for (let customer of customers) {
+
+    if (customer.customerType === 'student') {
+        typeDiscount = 0.05; // 5% discount
+    } else if (customer.customerType === 'senior') {
+        typeDiscount = 0.07;   // 7% discount
+    } else {
+        typeDiscount = 0;  // no discount
     }
 
-    let finalPrice = promoPrice * (1 - couponCode);
-    console.log(`The final price for ${product.name} is $${finalPrice}`);
+    let newPrice = customer.orderTotal * (1 - typeDiscount);
+    customers.push({newPrice}); // Adding newPrice to each customer object
+    // console.log(`The final price for customer ${customer.id} is $${newPrice}`);
 }
 
-let couponCode = ['SAVE10', 'FREESHIP'];
+// Step 5
+for (let customer of customers) {
 
-if (couponCode === 'SAVE10') {
-        if (promoPrice >= 50) {
-            promoPrice = promoPrice - 10; // $10 off for orders over $50
-        }
-} else if (couponCode === 'FREESHIP') {
-        promoPrice = promoPrice - 5; // $5 off for free shipping
+    if (customer.couponCode === 'SAVE10') {
+        couponCode = 10 // $10 off
+    } else if (customer.couponCode === 'FREESHIP') {
+        couponCode = 5 // $5 off
+    }
+
+    // let finalPrice = customer.newPrice - couponCode
+    // console.log(`The final price for customer ${customer.id} after coupon is $${finalPrice}`);
 }
