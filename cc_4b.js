@@ -32,6 +32,14 @@ for (let product of products) {
      console.log(`The promo price for ${product.name} is $${promoPrice}`);
 } 
 
+console.log('----------------------------------');
+
+// Add promoPrice to each product in the products array
+products.forEach(product => product.promoPrice = product.price * (1 - discount));
+
+// Display updated products array
+console.log(products);
+
 console.log('----------------------------------'); 
 
 // Step 4
@@ -53,20 +61,32 @@ for (let customer of customers) {
         typeDiscount = 0;  // no discount
     }
 
-    let newPrice = customer.orderTotal * (1 - typeDiscount);
-    customers.push({newPrice}); // Adding newPrice to each customer object
-    // console.log(`The final price for customer ${customer.id} is $${newPrice}`);
+    let orderTotal = customer.orderTotal * (1 - typeDiscount)
+    console.log(`The final price for customer ${customer.id} is $${orderTotal}`);
 }
+
+console.log('----------------------------------');
+
+customers.forEach(customer => customer.orderTotal = customer.orderTotal * (1 - typeDiscount));
+
+// Display updated customers array
+console.log(customers);
+
+console.log('----------------------------------');
 
 // Step 5
 for (let customer of customers) {
 
     if (customer.couponCode === 'SAVE10') {
-        couponCode = 10 // $10 off
+        codeDiscount = 10; // $10 off
     } else if (customer.couponCode === 'FREESHIP') {
-        couponCode = 5 // $5 off
+        codeDiscount = 5;   // $5 off
+    } else {
+        codeDiscount = 0;  // no discount
     }
 
-    // let finalPrice = customer.newPrice - couponCode
-    // console.log(`The final price for customer ${customer.id} after coupon is $${finalPrice}`);
+    let finalPrice = customer.orderTotal - codeDiscount
+    console.log(`The final price for customer ${customer.id} is $${finalPrice}`);
 }
+
+// Step 6
